@@ -24,7 +24,8 @@ module.exports = {
       styles: path.resolve(__dirname, './src/assets/styles'),
       components: path.resolve(__dirname, './src/components'),
       contexts: path.resolve(__dirname, './src/contexts'),
-      reducers: path.resolve(__dirname, './src/reducers')
+      reducers: path.resolve(__dirname, './src/reducers'),
+      graphqlquery: path.resolve(__dirname, './src/graphqlquery')
     }
   },
   output: {
