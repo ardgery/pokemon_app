@@ -9,9 +9,25 @@ const {
   GraphQLSchema
 } = require('graphql');
 
-// Pokemon Type
+
+const ListPokemonType = new GraphQLObjectType({
+  name: 'listpokemons',
+  fields: () => ({
+    name:{ type: GraphQLString },
+    url:{ type: GraphQLString}
+  })
+});
+
 const PokemonType = new GraphQLObjectType({
-  name: 'Pokemon',
+  name: 'pokemon',
+  fields: () => ({
+    id:{ type: GraphQLInt },
+    moves: {type: new GraphQLList(MoveTypeDetail)},
+    types: {type: new GraphQLList(MoveTypeDetail)}
+  })
+});
+const MoveTypeDetail = new GraphQLObjectType({
+  name: 'movedetail',
   fields: () => ({
     name:{ type: GraphQLString },
     url:{ type: GraphQLString}
@@ -22,16 +38,36 @@ const PokemonType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    pokemons: {
-      type: new GraphQLList(PokemonType),
+    listpokemons: {
+      type: new GraphQLList(ListPokemonType),
       resolve(parent, args) {
         return axios
           .get('https://pokeapi.co/api/v2/pokemon')
-          .then(res => res.data.results)
+          .then(res => {
+            return res.data.results;
+          })
+      }
+    },
+    pokemon: {
+      type: PokemonType,
+      args: {
+        id: { type: GraphQLInt }
+      },
+      resolve(parent, args) {
+        return axios
+          .get(`https://pokeapi.co/api/v2/pokemon/${args.id}`)
+          .then(res => {
+            return({
+              id: res.data.id,
+              moves: res.data.moves.map(item=>item.move),
+              types: res.data.types.map(item=>item.type)
+            });
+          });
       }
     }
   }
 });
+
 
 module.exports = new GraphQLSchema({
   query: RootQuery

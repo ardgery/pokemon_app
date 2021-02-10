@@ -1,7 +1,9 @@
+@import "./variables.scss";
+
 @mixin boxShadow{
-    -moz-box-shadow: 0px 3px 8px rgb(100,100,100);
-    -webkit-box-shadow: 0px 3px 8px rgb(100,100,100);
-    box-shadow: 0px 3px 8px rgb(100,100,100);
+    -moz-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 @mixin fadeKeyframes{
     @-webkit-keyframes fade {
@@ -14,13 +16,6 @@
         100%  {opacity:1;}
     }
 }
-@mixin clearFloat{
-    &:after{
-        content: "";
-        clear: both;
-        display: table;
-    }
-}
 @mixin mediaMiniFont{
     @media (min-width:$breakPhoneLandscape)  {
         font-size:$semiFont;
@@ -30,4 +25,11 @@
         font-size:$normalFont;
         height:$normalFont;
     }
+}
+@mixin redGradient{
+    background: $mainRed;  
+    background: -webkit-linear-gradient(to left, $secondaryRed, $mainRed); 
+    background: linear-gradient(to left, $secondaryRed, $mainRed); 
+    color:#fff;
+    transition:all 0.25s ease-in-out;
 }

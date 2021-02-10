@@ -1,0 +1,26 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+.header{
+    border-bottom:solid 2px $mainRed;
+    .menu{
+        display:flex;
+        justify-content: center;
+        a{
+            margin-right:25px;
+            padding:5px 20px;
+            border:solid 2px $mainRed;
+            border-bottom:none;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            text-decoration: none;
+            color:$mainBlack;
+            font-size:$headingSmall;
+            &:hover {
+                @include redGradient;
+            }
+        }
+        a.active{
+            @include redGradient;
+        }
+    }
+}
