@@ -2,9 +2,14 @@
 @import "../mixins.scss";
 .header{
     border-bottom:solid 2px $mainRed;
+    position: fixed;
+    top:0;
+    width:100%;
+    z-index:1;
     .menu{
         display:flex;
         justify-content: center;
+        background: #fff;
         a{
             margin-right:25px;
             padding:5px 20px;

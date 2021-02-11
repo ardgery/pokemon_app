@@ -1,16 +1,18 @@
 import React, {createContext, useReducer, useEffect} from 'react';
-import pokemonReducer from '../reducers/pokemonReducer';
+import pokemonReducer from 'reducers/pokemonReducer';
+import mypokemonReducer from 'reducers/mypokemonReducer';
 import { GET_ALL_POKEMONS } from 'graphqlquery/Queries';
 import { useQuery } from '@apollo/client';
 
 export const PokemonContext = createContext();
 
 export default function PokemonContextProvider(props) {
-    let [pokemons, dispatch] = useReducer( pokemonReducer ,[]);
+    const [pokemons, dispatch] = useReducer( pokemonReducer ,[]);
+    const [mypokemon, dispatchMyPokemon] = useReducer( mypokemonReducer ,[]);
     const { data } = useQuery(GET_ALL_POKEMONS);
     function setOwned(par){
-        let datas = par.map((v,i) => 
-            Object.assign({}, v, {owned:0,id:i+1})
+        let datas = par.map((v) => 
+            Object.assign({}, v, {owned:[]})
         )
         return datas;
     }
@@ -24,7 +26,7 @@ export default function PokemonContextProvider(props) {
     },[data])
         
     return (
-        <PokemonContext.Provider value={{pokemons, dispatch}}>
+        <PokemonContext.Provider value={{pokemons, dispatch,mypokemon,dispatchMyPokemon}}>
             {props.children}
         </PokemonContext.Provider>
     );

@@ -13,8 +13,7 @@ const {
 const ListPokemonType = new GraphQLObjectType({
   name: 'listpokemons',
   fields: () => ({
-    name:{ type: GraphQLString },
-    url:{ type: GraphQLString}
+    name:{ type: GraphQLString }
   })
 });
 
@@ -22,15 +21,15 @@ const PokemonType = new GraphQLObjectType({
   name: 'pokemon',
   fields: () => ({
     id:{ type: GraphQLInt },
-    moves: {type: new GraphQLList(MoveTypeDetail)},
-    types: {type: new GraphQLList(MoveTypeDetail)}
+    name: {type: GraphQLString},
+    moves: {type: new GraphQLList(CommonType)},
+    types: {type: new GraphQLList(CommonType)}
   })
 });
-const MoveTypeDetail = new GraphQLObjectType({
-  name: 'movedetail',
+const CommonType = new GraphQLObjectType({
+  name: 'commondetail',
   fields: () => ({
     name:{ type: GraphQLString },
-    url:{ type: GraphQLString}
   })
 });
 
@@ -59,6 +58,7 @@ const RootQuery = new GraphQLObjectType({
           .then(res => {
             return({
               id: res.data.id,
+              name: res.data.forms[0].name,
               moves: res.data.moves.map(item=>item.move),
               types: res.data.types.map(item=>item.type)
             });

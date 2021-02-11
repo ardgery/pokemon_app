@@ -1,20 +1,49 @@
 @import '../mixins';
+@import '../variables';
 .listWrapper{
     display: block;
     max-width:1208px;
     margin: 0 auto;
+    padding: 40px 0 90px 0;
+    position: relative;
+    z-index:0;
+    &:before {
+        position: fixed;
+        z-index: -1;
+        top:30px;
+        left:0;
+        bottom:0;
+        right:0;
+        margin:auto;
+        width:800px;
+        content: url('images/bg_main.svg');
+        opacity:0.1;
+    }
     .list{
         display:flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         padding-top:30px;
-        .card{
+        .card{   
+            background:#fff;
+            width:23.5%;
             border-radius:5px;
-            padding:10px;
+            margin-right:2%;
+            padding:10px 15px;
             @include boxShadow;
-            width:21.5%;
             margin-bottom:30px;
             word-wrap: break-word;
+            box-sizing:border-box;
+            a{
+                text-decoration: none;
+                color:$mainBlack;
+                font-size:$headingSmall;
+                text-transform:capitalize;
+                font-weight:bold;
+                img{
+                    display:block;
+                    margin: 0 auto;
+                }
+            }
         }
     }
 }

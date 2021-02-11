@@ -2,6 +2,7 @@ import React, {useContext,useEffect} from 'react';
 import Card from 'components/Card';
 import 'styles/pages/pokemon_list.scss';
 import { PokemonContext } from 'contexts/PokemonContext';
+import MainBg from 'images/bg_main.svg';
 
 export default function PokemonList() {
     const {pokemons} = useContext(PokemonContext);
@@ -15,7 +16,7 @@ export default function PokemonList() {
             <div className="list">
                 {
                     pokemons.map((v,i)=>{
-                        return <Card key={i} name={v.name} url={v.url} owned={v.owned} id={v.id}/>
+                        return <Card key={i} name={v.name} id={i+1}/>
                     })
                 }
             </div>

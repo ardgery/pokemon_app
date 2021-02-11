@@ -7,7 +7,6 @@ import PokemonList from 'components/PokemonList';
 import PokemonDetail from 'components/PokemonDetail';
 import MyPokemon from 'components/MyPokemon';
 import PokemonContextProvider from 'contexts/PokemonContext';
-// import MyPokemonContextProvider from 'contexts/MyPokemonContext';
 
 const client = new ApolloClient({
     uri: 'http://localhost:5000/graphql',
@@ -19,15 +18,13 @@ function App(){
         <ApolloProvider client={client}>
             <Router>
                 <PokemonContextProvider>
-                    {/* <MyPokemonContextProvider> */}
-                        <div className="App">
-                            <Header />
-                                <Route exact path="/" component={PokemonList} />
-                                <Route exact path="/mypokemon" component={MyPokemon} />
-                                <Route exact path="/pokemon/:id" component={PokemonDetail} />
-                            <Footer />
-                        </div>
-                    {/* </MyPokemonContextProvider> */}
+                    <div className="App">
+                        <Header />
+                            <Route exact path="/" component={PokemonList} />
+                            <Route exact path="/mypokemon" component={MyPokemon} />
+                            <Route exact path="/pokemon/:id" component={PokemonDetail} />
+                        <Footer />
+                    </div>
                 </PokemonContextProvider>
             </Router>
         </ApolloProvider>

@@ -15,6 +15,17 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [ "style-loader", "css-loader","sass-loader" ],
       },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './src/assets/images/[hash]-[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
@@ -22,6 +33,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
     alias: {
       styles: path.resolve(__dirname, './src/assets/styles'),
+      images: path.resolve(__dirname, './src/assets/images'),
       components: path.resolve(__dirname, './src/components'),
       contexts: path.resolve(__dirname, './src/contexts'),
       reducers: path.resolve(__dirname, './src/reducers'),
