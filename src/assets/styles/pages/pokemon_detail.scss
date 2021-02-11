@@ -42,7 +42,7 @@
             .detailPokemon{
                 display: flex;
                 flex-direction: column;
-                @include flatGreyGradient;
+                background:$mainGrey;
                 padding: 25px;
                 p{
                     margin: 5px 15px 15px 0;
@@ -50,17 +50,17 @@
                     color: #fff;
                     padding: 10px 20px;
                     font-size: $XLFont;
-                    @include greyGradient;
+                    background:#9b59b6;
                 }
                 div.moves{
                     p{
-                        @include blueGradient; 
+                        background:#3498db;
                     }
                 }
                 h2{
                     margin:0;
                     font-size:$headingBig;
-                    color:$mainBlack;
+                    color:#fff;
                 }
                 h2.headingMoves{
                     margin-top: 15px;

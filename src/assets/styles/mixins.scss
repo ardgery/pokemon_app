@@ -41,10 +41,11 @@
     transition:all 0.25s ease-in-out;
 }
 
-@mixin greyGradient{
-    background: #485563; 
-    background: -webkit-linear-gradient(to right, #29323c, #485563);  
-    background: linear-gradient(to right, #29323c, #485563);
+@mixin purpleGradient{
+    background: #ad5389;  
+    background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
+    background: linear-gradient(to right, #3c1053, #ad5389); 
+    
     color:#fff;
     transition:all 0.25s ease-in-out;
 }
