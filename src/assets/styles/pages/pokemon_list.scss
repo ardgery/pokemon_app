@@ -19,6 +19,9 @@
         content: url('images/bg_main.svg');
         opacity:0.1;
     }
+    h1{
+        margin-top:50px;
+    }
     .list{
         display:flex;
         flex-wrap: wrap;
@@ -28,7 +31,6 @@
             width:23.5%;
             border-radius:5px;
             margin-right:2%;
-            padding:10px 15px;
             @include boxShadow;
             margin-bottom:30px;
             word-wrap: break-word;
@@ -39,9 +41,54 @@
                 font-size:$headingSmall;
                 text-transform:capitalize;
                 font-weight:bold;
+                color:#fff;
+                transition: all 0.25s ease-in-out;
+                &:hover{
+                    color:$mainGrey;
+                }
                 img{
                     display:block;
                     margin: 0 auto;
+                }
+            }
+            a.imgWrapper{
+                padding:10px 0;
+                display:block;
+                transition: all 0.25s ease-in-out;
+                background:#fff;
+                &:hover{
+                    background:$mainGrey;
+                }
+            }
+            .nameWrapper{
+                @include greenGradient;
+                padding:10px 15px;
+            }
+            p{
+                text-align:center;
+                font-size: $XLFont;
+                font-weight:bold;
+                background: #fff;
+                margin:0;
+                padding:18px 0;
+            }
+            button{
+                border: none;
+                border-radius: 5px;
+                padding: 10px 15px;
+                margin: 0 auto;
+                display: block;
+                margin-bottom: 15px;
+                font-size: 15px;
+                cursor: pointer;
+                background: $boldRed;
+                color:#fff;
+                transition:all 0.25s ease-in-out;
+                border:solid 1px $boldRed;
+                &:hover{
+                    background:#fff;
+                    color:$boldRed;
+                    font-weight:bold;
                 }
             }
         }

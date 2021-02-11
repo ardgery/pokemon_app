@@ -9,12 +9,17 @@ export default function MyPokemon() {
     useEffect(()=>{
         console.log("myPokemon = ",mypokemon)
     },[])
+
+
     return (
         <div className="listWrapper">
+            {mypokemon.length<1 && (
+                <h1>You currently don't have any owned pokemon.</h1>
+            )}
             <div className="list">
                 {
                     mypokemon.map((v,i)=>{
-                        return <Card key={i} name={v.name} nickname={v.nickname} id={i+1}/>
+                        return <Card key={i} name={v.name} nickname={v.nickname} id={v.id}/>
                     })
                 }
             </div>

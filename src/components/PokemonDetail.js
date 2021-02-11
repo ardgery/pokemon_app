@@ -1,12 +1,14 @@
 import React,{useEffect, useContext, useState} from 'react';
 import 'styles/pages/pokemon_detail.scss';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { GET_POKEMON_DETAIL } from 'graphqlquery/Queries';
 import { useQuery } from '@apollo/client';
 import { PokemonContext } from 'contexts/PokemonContext';
 
 
 export default function PokemonDetail() {
+    var url = new URL(window.location.href);
+    console.log("URLLL = ",url)
     let { id } = useParams();
     id = parseInt(id);
     const { loading, error, data } = useQuery(GET_POKEMON_DETAIL, {
@@ -37,7 +39,7 @@ export default function PokemonDetail() {
             }
             if(!checkExistNickname(nickname)){
                 dispatch({
-                    type: "UPDATED_OWNED_POKEMON",
+                    type: "UPDATE_OWNED_POKEMON",
                     payload: {id:id-1, nickname:nickname}
                 });
                 dispatchMyPokemon({
@@ -61,10 +63,42 @@ export default function PokemonDetail() {
     }
 
     return (
-        <div>
-            <h1>Pokemon Detail</h1>
-            <input type="text" onChange={(e)=>setNickname(e.target.value)} value={nickname}/>
-            <button onClick={()=>getPokemon(id)}>Get Pokemon</button>
+        <div className="detailWrapper">
+            <div className="detailInside">
+                <div className="imgWrapper">
+                    <img src={"https://pokeres.bastionbot.org/images/pokemon/"+id+'.png'} width="300px" alt=""/>
+                </div>
+                <div className="detailColumns">
+                    <h1>{data && data.pokemon.name}</h1>
+                    <div className="detailPokemon">
+                        <h2>Types</h2>
+                        <div>
+                            {
+                                data  && data.pokemon.types.map((v,i)=>{
+                                    return (
+                                        <p key={i}>{v.name}</p>
+                                    )
+                                })
+                            }
+                        </div>
+                        <h2 className="headingMoves">Moves</h2>
+                        <div className="moves">
+                            {
+                                data  && data.pokemon.moves.map((v,i)=>{
+                                    if(i<3){
+                                        return (
+                                            <p key={i}>{v.name}</p>
+                                        )
+                                    }
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button>Catch this Pokemon!</button>
+            {/* <input type="text" onChange={(e)=>setNickname(e.target.value)} value={nickname}/>
+            <button onClick={()=>getPokemon(id)}>Get Pokemon</button> */}
         </div>
     )
 }

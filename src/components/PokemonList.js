@@ -16,7 +16,7 @@ export default function PokemonList() {
             <div className="list">
                 {
                     pokemons.map((v,i)=>{
-                        return <Card key={i} name={v.name} id={i+1}/>
+                        return <Card key={i} name={v.name} owned={v.owned} id={i+1}/>
                     })
                 }
             </div>

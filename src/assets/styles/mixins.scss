@@ -33,3 +33,34 @@
     color:#fff;
     transition:all 0.25s ease-in-out;
 }
+@mixin greenGradient{
+    background: $mainGreen;  
+    background: -webkit-linear-gradient(to left, $secondaryGreen, $mainGreen); 
+    background: linear-gradient(to left, $secondaryGreen, $mainGreen); 
+    color:#fff;
+    transition:all 0.25s ease-in-out;
+}
+
+@mixin greyGradient{
+    background: #485563; 
+    background: -webkit-linear-gradient(to right, #29323c, #485563);  
+    background: linear-gradient(to right, #29323c, #485563);
+    color:#fff;
+    transition:all 0.25s ease-in-out;
+}
+
+@mixin blueGradient{
+    background: #005C97;  
+    background: -webkit-linear-gradient(to right, #363795, #005C97);  
+    background: linear-gradient(to right, #363795, #005C97); 
+    color:#fff;
+    transition:all 0.25s ease-in-out;
+}
+
+@mixin flatGreyGradient{
+    background: #D3CCE3; 
+    background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3);    
+    color:#fff;
+    transition:all 0.25s ease-in-out;
+}

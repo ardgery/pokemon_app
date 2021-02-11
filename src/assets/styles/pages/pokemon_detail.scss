@@ -1,0 +1,95 @@
+@import '../mixins';
+@import '../variables';
+.detailWrapper{
+    max-width: 500px;  
+    margin:0 auto;
+    position: relative;
+    z-index: 0;
+    &:before {
+        position: fixed;
+        z-index: -1;
+        top:30px;
+        left:0;
+        bottom:0;
+        right:0;
+        margin:auto;
+        width:800px;
+        content: url('images/bg_main.svg');
+        opacity:0.1;
+    }
+    .detailInside{
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 30px auto 0 auto;
+        padding: 40px 0 25px 0;
+        .imgWrapper{
+            border-radius:5px;
+            img{
+                display:block;
+                margin:0 auto;
+            }
+        }
+    
+        .detailColumns{
+            h1{
+                margin:0;
+                text-align: center;
+                padding:15px 0;
+                @include greenGradient;
+                text-transform: capitalize;
+            }
+            .detailPokemon{
+                display: flex;
+                flex-direction: column;
+                @include flatGreyGradient;
+                padding: 25px;
+                p{
+                    margin: 5px 15px 15px 0;
+                    border-radius: 5px;
+                    color: #fff;
+                    padding: 10px 20px;
+                    font-size: $XLFont;
+                    @include greyGradient;
+                }
+                div.moves{
+                    p{
+                        @include blueGradient; 
+                    }
+                }
+                h2{
+                    margin:0;
+                    font-size:$headingBig;
+                    color:$mainBlack;
+                }
+                h2.headingMoves{
+                    margin-top: 15px;
+                }
+                div{
+                    display:flex;
+                }
+            }
+        }
+    }
+    button{
+        border: none;
+        border-radius: 5px;
+        padding: 15px 20px;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 15px;
+        font-size: 15px;
+        cursor: pointer;
+        background: $boldRed;
+        color: #fff;
+        transition: all 0.25s ease-in-out;
+        border: solid 1px $boldRed;
+        font-size: 20px;
+        font-weight: bold;
+        &:hover{
+            background:#fff;
+            color:$boldRed;
+            font-weight:bold;
+        }
+    }
+}
