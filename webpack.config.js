@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
@@ -23,7 +24,7 @@ module.exports = {
             options: {
               name: './src/assets/images/[hash]-[name].[ext]',
             },
-          },
+          }
         ],
       },
     ],
@@ -46,7 +47,28 @@ module.exports = {
     publicPath: '/'
   },
   devtool: "source-map",
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        plugins: [
+          ['gifsicle', { interlaced: true }],
+          ['jpegtran', { progressive: true }],
+          ['optipng', { optimizationLevel: 5 }],
+          [
+            'svgo',
+            {
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
+              ],
+            },
+          ],
+        ],
+      },
+    }),
+  ],
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
     hot: true,
