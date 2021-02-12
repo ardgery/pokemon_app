@@ -6,11 +6,13 @@
     top:0;
     width:100%;
     z-index:1;
+    @include headerGradient;
+    padding-top:20px;
     .menu{
         display:flex;
         justify-content: center;
-        background: #fff;
         a{
+            background: #fff;
             margin-right:25px;
             padding:5px 20px;
             border:solid 2px $mainRed;
@@ -22,6 +24,11 @@
             font-size:$headingSmall;
             &:hover {
                 @include redGradient;
+            }
+            @media (max-width:$breakPhoneLandscape)  {
+                font-size:$XLFont;
+                padding: 5px 10px;
+                margin-right:10px;
             }
         }
         a.active{

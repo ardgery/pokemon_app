@@ -1,4 +1,5 @@
 @import './variables';
+@import './mixins';
 body{
     font-family: 'Trebuchet MS', sans-serif;
     margin:0;
@@ -6,4 +7,95 @@ body{
 }
 .mr-0{
     margin-right:0 !important;
+}
+
+.modalInside{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media (max-width:$breakPhoneLandscape)  {
+        align-items: normal;
+        padding: 10px;
+        justify-content: flex-start;
+    }
+    h2{
+        font-size: $headingBig;
+        margin-bottom:0;
+        @media (max-width:$breakPhoneLandscape)  {
+            font-size:22px;
+        }
+    }
+    .modalButtonWrapper{
+        display: flex;
+        flex: 1;
+        align-items: flex-end;
+        margin-top: 40px;
+        button{
+            @include button;
+            font-size: 15px;
+            margin:0 20px 0 0;
+            width:150px;
+            font-size: $XLFont;
+            background: $boldBlue;
+            border:solid 1px $boldBlue;
+            &:hover{
+                background: #fff;
+                color: $boldBlue;
+            }
+            @media (max-width:$breakPhoneLandscape)  {
+                font-size:17px;
+            }
+        }
+        button.closeForm{
+            background: $cancelGrey;
+            border:solid 1px $cancelGrey;
+            &:hover{
+                background: #fff;
+                color: $cancelGrey;
+            }
+        }
+    }
+    img{
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%,-50%);
+    }
+    .addNicknameForm{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+        .inputWrapper{
+            display:flex;
+            input[type=text]{
+                height: 35px;
+                border: solid 1px #485461;
+                border-radius: 5px;
+                width: 250px;
+                padding-left: 10px;
+                font-size: $advanceFont;
+                @media (max-width:$breakPhoneLandscape)  {
+                    width: 180px;
+                }
+            }
+            button{
+                @include button;
+                display: block;
+                margin: 0;
+                font-size: $advanceFont;
+                width: 100px;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+.danger{
+    color:red;
+}
+.success{
+    color:green;
 }

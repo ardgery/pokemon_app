@@ -2,7 +2,7 @@ import React,{useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { PokemonContext } from 'contexts/PokemonContext';
 
-export default function Card({id,name,nickname,owned}) {
+export default function Card({id,name,nickname,owned,cardIndex}) {
     const {dispatchMyPokemon,dispatch} = useContext(PokemonContext);
     const ownedText = () => {
         if(owned.length>0) return <p>Owned : {owned.length}</p>;
@@ -23,7 +23,7 @@ export default function Card({id,name,nickname,owned}) {
         })
     }
     return (
-        <div className={"card "+ ((id% 4== 0)?'mr-0':'')}>
+        <div className={"card "+ ((cardIndex % 4== 0)?'mr-0':'')}>
             <Link to={`/pokemon/${id}`} className="imgWrapper"><img src={"https://pokeres.bastionbot.org/images/pokemon/"+id+'.png'} width="70%" alt=""/></Link>
             <div className="nameWrapper"><Link to={`/pokemon/${id}`}>{name}</Link></div>
             {owned && ownedText()}

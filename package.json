@@ -7,7 +7,8 @@
     "start": "webpack serve --config ./webpack.config.js --mode development",
     "test": "echo \"No test specified\" && exit 0",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm run server\" \"npm start\""
+    "dev": "concurrently \"npm run server\" \"npm start\"",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -43,6 +44,7 @@
     "graphql": "^15.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
     "uuid": "^8.3.2"
   }

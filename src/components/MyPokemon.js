@@ -7,9 +7,7 @@ export default function MyPokemon() {
     const {mypokemon} = useContext(PokemonContext);
 
     useEffect(()=>{
-        console.log("myPokemon = ",mypokemon)
     },[])
-
 
     return (
         <div className="listWrapper">
@@ -19,7 +17,7 @@ export default function MyPokemon() {
             <div className="list">
                 {
                     mypokemon.map((v,i)=>{
-                        return <Card key={i} name={v.name} nickname={v.nickname} id={v.id}/>
+                        return <Card key={i} name={v.name} nickname={v.nickname} id={v.id} cardIndex={i+1}/>
                     })
                 }
             </div>

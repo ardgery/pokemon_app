@@ -17,13 +17,11 @@
     }
 }
 @mixin mediaMiniFont{
-    @media (min-width:$breakPhoneLandscape)  {
-        font-size:$semiFont;
-        height:16px;
-    }
-    @media (min-width:$breakTablet)  {
+    @media (max-width:$breakTablet)  {
         font-size:$normalFont;
-        height:$normalFont;
+    }
+    @media (max-width:$breakPhoneLandscape)  {
+        font-size:$semiFont;
     }
 }
 @mixin redGradient{
@@ -40,28 +38,34 @@
     color:#fff;
     transition:all 0.25s ease-in-out;
 }
-
-@mixin purpleGradient{
-    background: #ad5389;  
-    background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  
-    background: linear-gradient(to right, #3c1053, #ad5389); 
-    
-    color:#fff;
-    transition:all 0.25s ease-in-out;
-}
-
-@mixin blueGradient{
-    background: #005C97;  
-    background: -webkit-linear-gradient(to right, #363795, #005C97);  
-    background: linear-gradient(to right, #363795, #005C97); 
-    color:#fff;
-    transition:all 0.25s ease-in-out;
-}
-
 @mixin flatGreyGradient{
     background: #D3CCE3; 
     background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  
     background: linear-gradient(to right, #E9E4F0, #D3CCE3);    
     color:#fff;
     transition:all 0.25s ease-in-out;
+}
+@mixin headerGradient{
+    background: #0f0c29; 
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); 
+    transition:all 0.25s ease-in-out;
+}
+@mixin button{
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 15px;
+    cursor: pointer;
+    background: $boldRed;
+    color:#fff;
+    transition:all 0.25s ease-in-out;
+    border:solid 1px $boldRed;
+    box-sizing: border-box;
+    &:hover{
+        background:#fff;
+        color:$boldRed;
+        font-weight:bold;
+    }
 }

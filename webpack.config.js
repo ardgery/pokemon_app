@@ -42,13 +42,15 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   devtool: "source-map",
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     contentBase: path.resolve(__dirname, './dist'),
     hot: true,
+    historyApiFallback: true,
   },
   target: 'web'
 };

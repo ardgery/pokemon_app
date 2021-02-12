@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client';
 export const PokemonContext = createContext();
 
 export default function PokemonContextProvider(props) {
-    const [pokemons, dispatch] = useReducer( pokemonReducer ,[]);
+    const [pokemons, dispatch] = useReducer( pokemonReducer ,);
     const [mypokemon, dispatchMyPokemon] = useReducer( mypokemonReducer ,[]);
     const { data } = useQuery(GET_ALL_POKEMONS);
     function setOwned(par){
