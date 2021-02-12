@@ -9,7 +9,7 @@ import useWindowDimensions from 'components/util/useWindowDimensions';
 
 
 export default function PokemonDetail() {
-    const { height, width } = useWindowDimensions();
+    const {width } = useWindowDimensions();
     function getPokemonIdFromUrl(){
         var url = new URL(window.location.href);
         let hrefSplit = url.href.split('/')

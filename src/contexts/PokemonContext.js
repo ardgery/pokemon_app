@@ -7,8 +7,24 @@ import { useQuery } from '@apollo/client';
 export const PokemonContext = createContext();
 
 export default function PokemonContextProvider(props) {
-    const [pokemons, dispatch] = useReducer( pokemonReducer ,);
-    const [mypokemon, dispatchMyPokemon] = useReducer( mypokemonReducer ,[]);
+    const [pokemons, dispatch] = useReducer( pokemonReducer,undefined,()=>{
+        const localData = localStorage.getItem('pokemons');
+        return localData ? JSON.parse(localData) : [];
+    });
+
+    useEffect(()=>{
+        localStorage.setItem('pokemons', JSON.stringify(pokemons))
+    },[pokemons])
+
+    const [mypokemon, dispatchMyPokemon] = useReducer( mypokemonReducer ,[],()=>{
+        const localData = localStorage.getItem('mypokemon');
+        return localData ? JSON.parse(localData) : [];
+    });
+
+    useEffect(()=>{
+        localStorage.setItem('mypokemon', JSON.stringify(mypokemon))
+    },[mypokemon])
+
     const { data } = useQuery(GET_ALL_POKEMONS);
     function setOwned(par){
         let datas = par.map((v) => 
