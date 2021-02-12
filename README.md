@@ -3,7 +3,7 @@
 ### Live Website :
 https://pokemon-app-gery.netlify.app/
 
-### My React Stacks :
+### My App Stacks :
 ```sh
 - Stacking the dependencies from scratch.
 - React Hooks and Context with useReducer.
