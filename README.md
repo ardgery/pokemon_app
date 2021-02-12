@@ -1,7 +1,4 @@
 # Pokemon App ( by Gery )
-https://pokemon-app-gery.netlify.app/
-
-# Pokemon App ( by Gery )
 
 ### Live Website :
 https://pokemon-app-gery.netlify.app/
