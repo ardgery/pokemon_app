@@ -13,6 +13,7 @@ https://pokemon-app-gery.netlify.app/
 
 ### My React Stacks :
 ```sh
+- Stacking the dependencies from scratch.
 - React Hooks and Context with useReducer.
 - GraphQL using Apollo Client.
 - Webpack.
