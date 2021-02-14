@@ -1,59 +1,37 @@
+const { makeExecutableSchema } = require('apollo-server');
+const gql = require('graphql-tag');
 const axios = require('axios');
 
-const {
-  GraphQLObjectType,
-  GraphQLInt,
-  GraphQLString,
-  GraphQLBoolean,
-  GraphQLList,
-  GraphQLSchema
-} = require('graphql');
+const typeDefs = gql`
+  type ListPokemonType {
+    name: String
+  }
+  type PokemonType {
+    id: ID!
+    name: String
+    moves: [MovesAndTypes],
+    types: [MovesAndTypes]
+  }
+  type MovesAndTypes {
+    name: String
+  }
+  type Query {
+    listpokemonQuery: [ListPokemonType],
+    pokemonQuery(id: ID!): PokemonType
+  }
+`;
 
-
-const ListPokemonType = new GraphQLObjectType({
-  name: 'listpokemons',
-  fields: () => ({
-    name:{ type: GraphQLString }
-  })
-});
-
-const PokemonType = new GraphQLObjectType({
-  name: 'pokemon',
-  fields: () => ({
-    id:{ type: GraphQLInt },
-    name: {type: GraphQLString},
-    moves: {type: new GraphQLList(CommonType)},
-    types: {type: new GraphQLList(CommonType)}
-  })
-});
-const CommonType = new GraphQLObjectType({
-  name: 'commondetail',
-  fields: () => ({
-    name:{ type: GraphQLString },
-  })
-});
-
-// Root Query
-const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
-  fields: {
-    listpokemons: {
-      type: new GraphQLList(ListPokemonType),
-      resolve(parent, args) {
-        return axios
-          .get('https://pokeapi.co/api/v2/pokemon')
-          .then(res => {
-            return res.data.results;
-          })
-      }
-    },
-    pokemon: {
-      type: PokemonType,
-      args: {
-        id: { type: GraphQLInt }
-      },
-      resolve(parent, args) {
-        return axios
+const resolvers = {
+    Query: {
+        listpokemonQuery: () => {
+            return axios
+            .get('https://pokeapi.co/api/v2/pokemon')
+            .then(res => {
+              return res.data.results;
+            })
+        },
+        pokemonQuery: (parent, args, context, info) =>{
+          return axios
           .get(`https://pokeapi.co/api/v2/pokemon/${args.id}`)
           .then(res => {
             return({
@@ -63,12 +41,13 @@ const RootQuery = new GraphQLObjectType({
               types: res.data.types.map(item=>item.type)
             });
           });
-      }
-    }
-  }
-});
+        },
+    },
+  };
 
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers,
+  });
 
-module.exports = new GraphQLSchema({
-  query: RootQuery
-});
+  module.exports = schema;

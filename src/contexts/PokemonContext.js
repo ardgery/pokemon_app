@@ -36,7 +36,7 @@ export default function PokemonContextProvider(props) {
         if(data) {
             dispatch({
                 type: "SET_ALL_POKEMONS",
-                payload: setOwned(data.listpokemons)
+                payload: setOwned(data.listpokemonQuery)
             });
         }
     },[data])

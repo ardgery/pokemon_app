@@ -102,7 +102,7 @@ export default function PokemonDetail() {
                 type: "ADD_TO_MY_LIST",
                 payload: {
                     id:id,
-                    name:data.pokemon.name,
+                    name:data.pokemonQuery.name,
                     nickname:nickname,
                 }
             })
@@ -133,12 +133,12 @@ export default function PokemonDetail() {
                                 <img src={"https://pokeres.bastionbot.org/images/pokemon/"+id+'.png'} width="300px" alt=""/>
                             </div>
                             <div className="detailColumns">
-                                <h1>{data && data.pokemon.name}</h1>
+                                <h1>{data && data.pokemonQuery.name}</h1>
                                 <div className="detailPokemon">
                                     <h2>Types</h2>
                                     <div>
                                         {
-                                            data  && data.pokemon.types.map((v,i)=>{
+                                            data  && data.pokemonQuery.types.map((v,i)=>{
                                                 return (
                                                     <p key={i}>{v.name}</p>
                                                 )
@@ -148,7 +148,7 @@ export default function PokemonDetail() {
                                     <h2 className="headingMoves">Moves</h2>
                                     <div className="moves">
                                         {
-                                            data  && data.pokemon.moves.map((v,i)=>{
+                                            data  && data.pokemonQuery.moves.map((v,i)=>{
                                                 if(i<3){
                                                     return (
                                                         <p key={i}>{v.name}</p>
