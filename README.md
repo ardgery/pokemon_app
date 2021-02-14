@@ -2,6 +2,8 @@
 
 ### Live Website :
 https://pokemon-app-gery.netlify.app/
+note : you need to run server on local first to get graphql data ("npm run dev"),
+because currently I am unable to run graphql server on production. 
 
 ### My App Stacks :
 ```sh
@@ -19,5 +21,5 @@ https://pokemon-app-gery.netlify.app/
 2. Go to the root directory with command line and run 
    "npm install" for installing all dependencies for this project.
 3. After that run "npm run dev" for running the app.
-4. Open in browser http://localhost:8080/ to see the running app.
+4. Open in browser http://localhost:8080/ to see the running app. 
 ```
