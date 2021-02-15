@@ -2,6 +2,7 @@
 
 ### Live Website :
 https://pokemon-app-gery.netlify.app/
+
 note : you need to run server on local first to get graphql data ("npm run dev"),
 because currently I am unable to run graphql server on production. 
 
