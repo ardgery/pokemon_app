@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_ALL_POKEMONS = gql`
-  query ListpokemonQuery {
+  query listpokemonQuery {
     listpokemonQuery {
       name
     }
@@ -9,7 +9,7 @@ export const GET_ALL_POKEMONS = gql`
 `;
 
 export const GET_POKEMON_DETAIL = gql`
-  query PokemonqueryQuery($id: ID!) {
+  query PokemonqueryQuery($id: Int!) {
     pokemonQuery(id: $id) {
       id
       name

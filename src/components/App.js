@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider,createHttpLink } from '@apollo/client';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import PokemonList from 'components/PokemonList';
@@ -9,7 +9,11 @@ import MyPokemon from 'components/MyPokemon';
 import PokemonContextProvider from 'contexts/PokemonContext';
 
 const client = new ApolloClient({
-    uri: 'https://goofy-noyce-6f3fb6.netlify.app/.netlify/functions/api',
+    ssrMode: true,
+    link: createHttpLink({
+      uri: 'https://goofy-noyce-6f3fb6.netlify.app/.netlify/functions/api',
+      credentials: 'same-origin'
+    }),
     cache: new InMemoryCache()
 });
 
