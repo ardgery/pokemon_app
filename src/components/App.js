@@ -9,7 +9,7 @@ import MyPokemon from 'components/MyPokemon';
 import PokemonContextProvider from 'contexts/PokemonContext';
 
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'https://goofy-noyce-6f3fb6.netlify.app/.netlify/functions/api',
     cache: new InMemoryCache()
 });
 
