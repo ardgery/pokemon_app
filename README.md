@@ -14,7 +14,7 @@ https://pokemon-app-gery.netlify.app/
 - Styling with SASS.
 ```
 
-### How to Run the Application :
+### How to Locally Run the Application :
 ```sh
 1. Must have NPM installed in your system.
 2. Go to the root directory with command line and run 
