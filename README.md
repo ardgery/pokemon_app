@@ -3,16 +3,14 @@
 ### Live Website :
 https://pokemon-app-gery.netlify.app/
 
-note : you need to run server on local first to get graphql data ("npm run dev"),
-because currently I am unable to run graphql server on production. 
-
 ### My App Stacks :
 ```sh
 - Stacking the dependencies from scratch.
 - React Hooks and Context with useReducer.
-- GraphQL using Apollo Client.
+- GraphQL using Apollo Client with server express-graphql.
 - Webpack.
 - Mobile-First Responsive (mobile-tablet-desktop).
+- Server deployed with serverless netlify.
 - Styling with SASS.
 ```
 
