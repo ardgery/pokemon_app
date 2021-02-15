@@ -1,7 +1,10 @@
 # Pokemon App ( by Gery )
 
-### Live Website :
+## Live Website :
 https://pokemon-app-gery.netlify.app/
+
+#### Server Repository : 
+https://github.com/ardgery/poke_app_server
 
 ### My App Stacks :
 ```sh
