@@ -6,9 +6,6 @@ https://pokemon-app-gery.netlify.app/
 #### Server Repository : 
 https://github.com/ardgery/poke_app_server
 
-#### GraphQL Playground : 
-https://goofy-noyce-6f3fb6.netlify.app/.netlify/functions/api
-
 ### My App Stacks :
 ```sh
 - Stacking the dependencies from scratch.
