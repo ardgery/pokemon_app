@@ -7,6 +7,7 @@ import PokemonList from 'components/PokemonList';
 import PokemonDetail from 'components/PokemonDetail';
 import MyPokemon from 'components/MyPokemon';
 import PokemonContextProvider from 'contexts/PokemonContext';
+import MyPokemonContextProvider from 'contexts/MyPokemonContext';
 
 const client = new ApolloClient({
     ssrMode: true,
@@ -22,13 +23,15 @@ function App(){
         <ApolloProvider client={client}>
             <Router>
                 <PokemonContextProvider>
-                    <div className="App">
-                        <Header />
+                    <MyPokemonContextProvider>
+                        <div className="App">
+                            <Header />
                             <Route exact path="/" component={PokemonList} />
                             <Route exact path="/mypokemon" component={MyPokemon} />
                             <Route exact path="/pokemon/:id" component={PokemonDetail} />
-                        <Footer />
-                    </div>
+                            <Footer />
+                        </div>
+                    </MyPokemonContextProvider>
                 </PokemonContextProvider>
             </Router>
         </ApolloProvider>

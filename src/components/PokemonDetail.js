@@ -3,6 +3,7 @@ import 'styles/pages/pokemon_detail.scss';
 import { GET_POKEMON_DETAIL } from 'graphqlquery/Queries';
 import { useQuery } from '@apollo/client';
 import { PokemonContext } from 'contexts/PokemonContext';
+import { MyPokemonContext } from 'contexts/MyPokemonContext';
 import Modal from 'react-modal';
 import Loading from 'images/loading.gif';
 import useWindowDimensions from 'components/util/useWindowDimensions';
@@ -20,7 +21,8 @@ export default function PokemonDetail() {
     const { data } = useQuery(GET_POKEMON_DETAIL, {
         variables: { id }
     });
-    const { dispatch,dispatchMyPokemon,mypokemon } = useContext(PokemonContext);
+    const { dispatch } = useContext(PokemonContext);
+    const { dispatchMyPokemon,mypokemon } = useContext(MyPokemonContext);
     const [nickname, setNickname] = useState('');
     const [modalVisible,setModalVisible] = useState(false);
     const customStyles = {

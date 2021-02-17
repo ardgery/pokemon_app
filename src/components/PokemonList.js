@@ -5,22 +5,18 @@ import { PokemonContext } from 'contexts/PokemonContext';
 import Loading from 'images/loading.gif';
 
 export default function PokemonList() {
-    const {pokemons} = useContext(PokemonContext);
-    useEffect(()=>{
-    },[pokemons])
-   
-    if(pokemons){
-        return (
-            <div className="listWrapper">
-                <div className="list">
-                    {
-                        pokemons.map((v,i)=>{
-                            return <Card key={i} name={v.name} owned={v.owned} id={i+1} cardIndex={i+1} />
-                        })
-                    }
-                </div>
+    const {loading,error,pokemons} = useContext(PokemonContext);
+    if(loading) return <div className="listWrapper loadingWrapper"><img src={Loading} alt=""/></div>;
+    if(error) return <div className="listWrapper loadingWrapper"><h2>Error on Fetching Data</h2></div>;
+    return (
+        <div className="listWrapper">
+            <div className="list">
+                {
+                    pokemons.map((v,i)=>{
+                        return <Card key={i} name={v.name} owned={v.owned} id={i+1} cardIndex={i+1} />
+                    })
+                }
             </div>
-        );
-    }
-    return <div className="listWrapper loadingWrapper"><img src={Loading} alt=""/></div>;
+        </div>
+    );
 }

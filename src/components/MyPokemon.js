@@ -1,14 +1,10 @@
 import React,{useEffect,useContext} from 'react';
 import Card from 'components/Card';
 import 'styles/pages/pokemon_list.scss';
-import { PokemonContext } from 'contexts/PokemonContext';
+import { MyPokemonContext } from 'contexts/MyPokemonContext';
 
 export default function MyPokemon() {
-    const {mypokemon} = useContext(PokemonContext);
-
-    useEffect(()=>{
-    },[])
-
+    const {mypokemon} = useContext(MyPokemonContext);
     return (
         <div className="listWrapper">
             {mypokemon.length<1 && (
