@@ -4,7 +4,7 @@ import 'styles/pages/pokemon_list.scss';
 import { MyPokemonContext } from 'contexts/MyPokemonContext';
 
 export default function MyPokemon() {
-    const {mypokemon} = useContext(MyPokemonContext);
+    const {mypokemon,checkOwnedPokemon} = useContext(MyPokemonContext);
     return (
         <div className="listWrapper">
             {mypokemon.length<1 && (

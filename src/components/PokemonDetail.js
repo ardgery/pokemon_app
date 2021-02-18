@@ -21,7 +21,6 @@ export default function PokemonDetail() {
     const { data } = useQuery(GET_POKEMON_DETAIL, {
         variables: { id }
     });
-    const { dispatch } = useContext(PokemonContext);
     const { dispatchMyPokemon,mypokemon } = useContext(MyPokemonContext);
     const [nickname, setNickname] = useState('');
     const [modalVisible,setModalVisible] = useState(false);
@@ -96,10 +95,6 @@ export default function PokemonDetail() {
             setLoading(true);
             setResult(false);
             setFinalResult(true);
-            dispatch({
-                type: "UPDATE_OWNED_POKEMON",
-                payload: {id:id-1, nickname:nickname}
-            });
             dispatchMyPokemon({
                 type: "ADD_TO_MY_LIST",
                 payload: {
