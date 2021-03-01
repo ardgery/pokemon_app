@@ -11,22 +11,15 @@ export default function PokemonContextProvider(props) {
         const localData = localStorage.getItem('pokemons');
         return localData ? JSON.parse(localData) : [];
     });
-    function setOwned(par){
-        let datas = par.map((v) => 
-            Object.assign({}, v, {owned:[]})
-        )
-        return datas;
-    }
     function setAllPokemons(){
         dispatch({
             type: "SET_ALL_POKEMONS",
-            payload: setOwned(data.listpokemonQuery)
+            payload: data.listpokemonQuery
         });
     }
     useEffect(()=>{
         localStorage.setItem('pokemons', JSON.stringify(pokemons))
     },[pokemons])
-
     useEffect(()=>{
         if(data) {
             setAllPokemons();

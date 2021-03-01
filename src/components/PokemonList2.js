@@ -5,18 +5,21 @@ import { PokemonContext } from 'contexts/PokemonContext';
 import { MyPokemonContext } from 'contexts/MyPokemonContext';
 import Loading from 'images/loading.gif';
 
-export default function PokemonList() {
-    const {loading,error,pokemons} = useContext(PokemonContext);
-    const {mypokemon} = useContext(MyPokemonContext);
-    function countOwned(name){
+export function CountOwned(name,mypokemon){
+    if(mypokemon){
         let returnValue = 0;
         for(let i=0;i<mypokemon.length;i++){
             if( mypokemon[i].name === name ){
                 returnValue+=1;
             }
         }
-        return returnValue;
     }
+    return false;
+}
+export function PokemonList() {
+    const {loading,error,pokemons} = useContext(PokemonContext);
+    const {mypokemon} = useContext(MyPokemonContext);
+    
     if(loading) return <div className="listWrapper loadingWrapper"><img src={Loading} alt=""/></div>;
     if(error) return <div className="listWrapper loadingWrapper"><h2>Error on Fetching Data</h2></div>;
     return (
@@ -24,7 +27,7 @@ export default function PokemonList() {
             <div className="list">
                 {
                     pokemons.map((v,i)=>{
-                        return <Card key={i} name={v.name} id={i+1} cardIndex={i+1} totalOwned={countOwned(v.name)} isList={true}  />
+                        return <Card key={i} name={v.name} id={i+1} cardIndex={i+1} totalOwned={CountOwned(v.name,mypokemon)} isList={true}  />
                     })
                 }
             </div>

@@ -1,29 +1,58 @@
-import React,{useContext, useState} from 'react';
+import React,{useContext, useState,useReducer} from 'react';
 import 'styles/pages/pokemon_detail.scss';
 import { GET_POKEMON_DETAIL } from 'graphqlquery/Queries';
 import { useQuery } from '@apollo/client';
-import { PokemonContext } from 'contexts/PokemonContext';
 import { MyPokemonContext } from 'contexts/MyPokemonContext';
 import Modal from 'react-modal';
 import Loading from 'images/loading.gif';
 import useWindowDimensions from 'components/util/useWindowDimensions';
+import mypokemonReducer from 'reducers/mypokemonReducer';
+
+export function GetPokeChildren({txt}){
+    return(
+        <p>{txt}</p>
+    )
+}
 
 
-export default function PokemonDetail() {
+export function GetPoke({drill}){
+    return(
+        <div>
+            <p className="aca">{drill}</p>
+            <GetPokeChildren txt="ehehe" className="hoba" />
+        </div>
+        
+    )
+    // if(par1){
+    //     if(par2){
+    //         return true;
+    //     }
+    // }
+    // return false;
+}
+
+function setModalContentVisible(status){
+    const [visible,setVisible] = useState(false);
+    if(status) setVisible(true);
+    return visible;
+}
+
+export function RenderModalContent(modalVisible,setModalVisible,data,id){
     const {width } = useWindowDimensions();
-    function getPokemonIdFromUrl(){
-        var url = new URL(window.location.href);
-        let hrefSplit = url.href.split('/')
-        let idPokemon = parseInt(hrefSplit[hrefSplit.length-1]);
-        return idPokemon;
-    }
-    let id = getPokemonIdFromUrl();
-    const { data } = useQuery(GET_POKEMON_DETAIL, {
-        variables: { id }
+    const [initModal,setInitModal] = useState(true);
+    const [loading,setLoading] = useState(false);
+    const [result,setResult] = useState(false);
+    const [isSuccess,setIsSuccess] = useState(false);
+    const [resultMessage,setResultMessage] = useState('');
+    const [inputMessage,setInputMessage] = useState('');
+    const [finalResult,setFinalResult] = useState(false);
+    // const { dispatchMyPokemon,mypokemon } = useContext(MyPokemonContext);
+    const [mypokemon] = useReducer( mypokemonReducer ,[],()=>{
+        const localData = localStorage.getItem('mypokemon');
+        return localData ? JSON.parse(localData) : [];
     });
-    const { dispatchMyPokemon,mypokemon } = useContext(MyPokemonContext);
     const [nickname, setNickname] = useState('');
-    const [modalVisible,setModalVisible] = useState(false);
+
     const customStyles = {
         content : {
           top       : '0',
@@ -40,14 +69,13 @@ export default function PokemonDetail() {
             zIndex:1
         }
     };
-    const [initModal,setInitModal] = useState(true);
-    const [loading,setLoading] = useState(false);
-    const [result,setResult] = useState(false);
-    const [isSuccess,setIsSuccess] = useState(false);
-    const [resultMessage,setResultMessage] = useState('');
-    const [inputMessage,setInputMessage] = useState('');
-    const [finalResult,setFinalResult] = useState(false);
 
+    function closeForm(){
+        setResult(false);
+        setInitModal(true);
+        setResultMessage("");
+        setModalVisible(false)
+    }
     function checkExistNickname(newNickname){
         var existNickname = false;
         for(let i =0;i<mypokemon.length;i++){
@@ -58,7 +86,10 @@ export default function PokemonDetail() {
         }
         return existNickname;  
     }
-    function getPokemon(){
+    function getSuccess(){
+        return Math.random() < 0.5;
+    }
+    function getPokemon(isSuccess){
         setInitModal(false);
         setLoading(true);
         setResult(false);
@@ -68,22 +99,16 @@ export default function PokemonDetail() {
             setLoading(false);
             setResult(true);
         },1250)
-        
-        let success = Math.random() < 0.5;
 
-        if(success) {
+        if(isSuccess) {
             setIsSuccess(true)
             setResultMessage("Success Get this Pokemon! Please give a Nickname to your new Pokemon.")
+            return true;
         } else {
             setIsSuccess(false)
             setResultMessage("Failed to Catch this Pokemon! Note that probability to get a Pokemon is 50%.")
+            return false;
         }
-    }
-    function closeForm(){
-        setResult(false);
-        setInitModal(true);
-        setResultMessage("");
-        setModalVisible(false)
     }
     function validatePokemon(e){
         e.preventDefault();
@@ -119,10 +144,68 @@ export default function PokemonDetail() {
         }
     }
 
+    return(
+        <div>
+            <Modal 
+                isOpen={modalVisible}
+                contentLabel="Minimal Modal Example"
+                ariaHideApp={false}
+                style={customStyles}
+            >
+                <div className="modalInside">
+                    { initModal && (
+                            <div>
+                                <h2>Are you sure you want to catch this Pokemon?</h2>
+                                <div className="modalButtonWrapper">
+                                    <button onClick={()=>getPokemon(getSuccess())}>Yes</button>
+                                    <button className="closeForm" onClick={()=>closeForm()}>Cancel</button>
+                                </div>
+                            </div>
+                    )}
+                    {result && (
+                        <div>
+                            <h2 className={isSuccess?'success':'danger'}>{resultMessage}</h2>
+                            {isSuccess && !finalResult && (
+                                <form className="addNicknameForm">
+                                    <p className="danger">{inputMessage}</p>
+                                    <div className="inputWrapper">
+                                        <input autoFocus placeholder="type nickname here..." type="text" onChange={(e)=>{setNickname(e.target.value)}} value={nickname}/>
+                                        <button type="submit" onClick={(e)=>validatePokemon(e,nickname)}>Confirm</button>
+                                    </div>
+                                </form>
+                            )}
+                            {!isSuccess && (
+                                <div className="modalButtonWrapper">
+                                    <button onClick={()=>getPokemon(getSuccess())}>Try Again</button>
+                                    <button className="closeForm" onClick={()=>closeForm()}>Close Form</button>
+                            </div>
+                            )}
+                        </div>
+                    )}
+                    {loading && (<img src={Loading} alt="" width="120" />)}
+                </div>
+            </Modal>
+        </div>
+    )
+}
+
+export function PokemonDetail() {
+    function getPokemonIdFromUrl(){
+        var url = new URL(window.location.href);
+        let hrefSplit = url.href.split('/')
+        let idPokemon = parseInt(hrefSplit[hrefSplit.length-1]);
+        return idPokemon;
+    }
+    let id = getPokemonIdFromUrl();
+    
+    const { data } = useQuery(GET_POKEMON_DETAIL, {
+        variables: { id }
+    });
+    const [modalVisible,setModalVisible] = useState(false);
+
     return ( 
         <div className="detailWrapper">
             <div className="detailInside">
-
                 {
                     data && (
                         <div>
@@ -165,48 +248,7 @@ export default function PokemonDetail() {
 
             </div>
             {data && (<button onClick={()=>setModalVisible(true)}>Catch this Pokemon!</button>)}
-            <div>
-                <Modal 
-                    isOpen={modalVisible}
-                    contentLabel="Minimal Modal Example"
-                    ariaHideApp={false}
-                    style={customStyles}
-                >
-                    <div className="modalInside">
-                        { initModal && (
-                                <div>
-                                    <h2>Are you sure you want to catch this Pokemon?</h2>
-                                    <div className="modalButtonWrapper">
-                                        <button onClick={()=>getPokemon()}>Yes</button>
-                                        <button className="closeForm" onClick={()=>closeForm()}>Cancel</button>
-                                    </div>
-                                </div>
-                        )}
-                        {result && (
-                            <div>
-                                <h2 className={isSuccess?'success':'danger'}>{resultMessage}</h2>
-                                {isSuccess && !finalResult && (
-                                    <form className="addNicknameForm">
-                                        <p className="danger">{inputMessage}</p>
-                                        <div className="inputWrapper">
-                                            <input autoFocus placeholder="type nickname here..." type="text" onChange={(e)=>{setNickname(e.target.value)}} value={nickname}/>
-                                            <button type="submit" onClick={(e)=>validatePokemon(e)}>Confirm</button>
-                                        </div>
-                                    </form>
-                                )}
-                                {!isSuccess && (
-                                    <div className="modalButtonWrapper">
-                                        <button onClick={()=>getPokemon()}>Try Again</button>
-                                        <button className="closeForm" onClick={()=>closeForm()}>Close Form</button>
-                                </div>
-                                )}
-                            </div>
-                        )}
-                        {loading && (<img src={Loading} alt="" width="120" />)}
-                    </div>
-                </Modal>
-            </div>
-
+            {RenderModalContent(modalVisible,setModalVisible,data,id)}
         </div>
     )
 }

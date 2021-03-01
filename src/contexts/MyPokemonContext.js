@@ -10,6 +10,7 @@ export default function MyPokemonContextProvider(props) {
     });
     useEffect(()=>{
         localStorage.setItem('mypokemon', JSON.stringify(mypokemon));
+        console.log(mypokemon)
     },[mypokemon])
     return (
         <MyPokemonContext.Provider value={{mypokemon,dispatchMyPokemon}}>

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`success rate to get pokemon 1`] = `
+<div>
+  <p>
+    cuiwww
+  </p>
+  <p>
+    ehehe
+  </p>
+</div>
+`;
