@@ -12,7 +12,7 @@ import MyPokemonContextProvider from 'contexts/MyPokemonContext';
 const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
-        uri: 'http://localhost:5000/',
+        uri: 'http://localhost:4000/',
         credentials: 'same-origin'
     }),
     cache: new InMemoryCache()

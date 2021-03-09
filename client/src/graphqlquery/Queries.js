@@ -9,7 +9,7 @@ export const GET_ALL_POKEMONS = gql`
 `;
 
 export const GET_POKEMON_DETAIL = gql`
-  query PokemonqueryQuery($id: Int!) {
+  query PokemonqueryQuery($id: ID!) {
     pokemonQuery(id: $id) {
       id
       name
